@@ -1,12 +1,23 @@
 package com.example.pizzeria;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.pizzeria.Clases.BackgroundManager.getColorFondo;
+import static com.example.pizzeria.Clases.BackgroundManager.getColorTexto;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.example.pizzeria.Clases.Alertas;
+import com.example.pizzeria.Clases.DAOUsuarios;
+import com.example.pizzeria.Clases.Usuario;
 
 import java.util.ArrayList;
 
@@ -14,23 +25,72 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
 
 
     DAOUsuarios TodosLosUsuarios;
+    ConstraintLayout base;
 
+    TextView txtInicioSesion;
     TextView nombreUsuario;
     String textoNombreUsuario;
     TextView contraseñaUsuario;
     String textoContraseñaUsuario;
+    SharedPreferences sharedPreferences;
+    String savedUsername;
+    String savedPassword;
+    String colorFondo;
+    String colorTexto;
+    CheckBox txtRecuerdame;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iniciosesion);
+        //Botón de incio de sesión.
         Button botonInicioSesion = findViewById(R.id.btnIniciarSesion);
         botonInicioSesion.setOnClickListener(this);
+
+        //Obtengo el txtfield del nombre de usuario y la contraseña.
         nombreUsuario = findViewById(R.id.txfieldUsuario);
         contraseñaUsuario = findViewById(R.id.txtFieldContraseña);
+
+        //Instancio el DAO donde tengo guardado los usuarios.
         TodosLosUsuarios = new DAOUsuarios();
 
+
+        //Obtiene las preferencias.
+        sharedPreferences = getSharedPreferences("Preferencias", MODE_PRIVATE);
+
+        //Obtiene el nombre de usuario y la contraseña si han sido guardadas (con el check Recuerdame).
+        savedUsername = sharedPreferences.getString("nombreUsuario", "");
+        savedPassword = sharedPreferences.getString("contraseñaUsuario", "");
+
+        if (!savedUsername.isEmpty() && !savedPassword.isEmpty()) {
+            // Si se encuentran valores guardados, autocompletar los campos.
+            nombreUsuario = findViewById(R.id.txfieldUsuario);
+            contraseñaUsuario = findViewById(R.id.txtFieldContraseña);
+
+            nombreUsuario.setText(savedUsername);
+            contraseñaUsuario.setText(savedPassword);
+        }
+
+        base = findViewById(R.id.fondoInicioSesion);
+        txtInicioSesion = findViewById(R.id.txtInicioSesion);
+        txtRecuerdame = findViewById(R.id.checkRecuerdame);
+
+        colorFondo = getColorFondo(this);
+
+        colorTexto = getColorTexto(this);
+
+        if (colorFondo != "" && colorTexto !=""){
+            base.setBackgroundColor(Integer.parseInt(colorFondo));
+            nombreUsuario.setTextColor(Integer.parseInt(colorTexto));
+            contraseñaUsuario.setTextColor(Integer.parseInt(colorTexto));
+            txtInicioSesion.setTextColor(Integer.parseInt(colorTexto));
+            txtRecuerdame.setTextColor(Integer.parseInt(colorTexto));
+        }
+
+
     }
+
 
 
     //Comprueba si ese nombre de usuario ya está registrado.
@@ -69,14 +129,29 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
         if (comprobarNombreUsuarioRegistrado(nombreUsuarioAIniciar)){
             //Si la contraseña es correcta inicia sesión.
             if (validarInicioSesion( contraseñaUsuarioAIniciar)) {
-                Intent intent = new Intent(InicioSesion.this, Main.class);
+
+                Intent intent = new Intent(this, Main.class);
+                // Verificar si el CheckBox está marcado
+                CheckBox checkBoxRecuerdame = findViewById(R.id.checkRecuerdame);
+                if (checkBoxRecuerdame.isChecked()) {
+                    // Guardar el nombre de usuario y contraseña en preferencias compartidas
+                    SharedPreferences preferences = getSharedPreferences("Preferencias", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("nombreUsuario", nombreUsuarioAIniciar);
+                    editor.putString("contraseñaUsuario", contraseñaUsuarioAIniciar);
+                    editor.apply();
+                }
+
+                intent.putExtra("nombreUsuario", nombreUsuarioAIniciar);
                 startActivity(intent);
-            }//else{
-                //CONTRASEÑA INCORRECTA;
-            //}
-        }//else{
-            //MOSTRAR ERROR DE USUARIO NO REGISTRADO;
-        //}
+                finish();
+            }else{
+                Alertas.crearDialogo(this,"Contraseña incorrecta", "Has introducido mal la contraseña.",false,null);
+            }
+        }else{
+            Alertas.crearDialogo(this,"Usuario no registrado", "El usuario no está registrado.",false,null);
+
+        }
 
     }
 
@@ -91,7 +166,6 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
         //}
     }
 
-
     @Override
     public void onClick(View view) {
 
@@ -103,12 +177,17 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
             InicioDeSesion(textoNombreUsuario,textoContraseñaUsuario);
         }else if(view.getId() == R.id.btnRegistro){
             Registro(textoNombreUsuario,textoContraseñaUsuario);
+        }else if(view.getId() == R.id.btnSalir){
+            //Creo la función que quiero que haga.
+            DialogInterface.OnClickListener confirmarClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+
+                    finish();
+                }
+            };
+            Alertas.crearDialogo(this, "Salir", "¿Seguro que quieres salir de la aplicación?", true,confirmarClickListener);
         }
-
-
     }
-
-
-
-
 }

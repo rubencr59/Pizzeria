@@ -1,4 +1,4 @@
-package com.example.pizzeria;
+package com.example.pizzeria.Clases;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,6 @@ public class DAOUsuarios {
             copiaUsuario.setContraseña(usuario.getContraseña());
             copiaUsuarios.add(copiaUsuario);
         }
-
         return copiaUsuarios;
     }
 

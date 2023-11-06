@@ -1,6 +1,4 @@
-package com.example.pizzeria;
-
-import java.util.Objects;
+package com.example.pizzeria.Clases;
 
 public class Usuario {
 

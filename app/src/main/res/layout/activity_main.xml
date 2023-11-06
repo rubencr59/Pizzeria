@@ -2,8 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fondoMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:theme="@style/AppThemeWhite"
     tools:context=".Web">
 
 
@@ -12,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
+        android:background="#00FFFFFF"
         android:text="@string/strMensajeInicio"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -28,54 +32,58 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreUsuario" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnWeb"
         android:layout_width="140dp"
         android:layout_height="72dp"
         android:layout_marginTop="47dp"
+        android:onClick="onClick"
         android:text="WEB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myImageView" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnPedido"
         android:layout_width="140dp"
         android:layout_height="72dp"
         android:layout_marginTop="106dp"
         android:layout_marginBottom="100dp"
+        android:onClick="onClick"
         android:text="Pedido"
-        app:layout_constraintBottom_toBottomOf="@+id/button3"
+        app:layout_constraintBottom_toBottomOf="@+id/btnConfiguracion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintTop_toTopOf="@+id/btnWeb" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnConfiguracion"
         android:layout_width="140dp"
         android:layout_height="72dp"
         android:layout_marginBottom="61dp"
+        android:onClick="onClick"
         android:text="Configuración"
-        app:layout_constraintBottom_toTopOf="@+id/btnSalir"
+        app:layout_constraintBottom_toTopOf="@+id/btnCerrarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnSalir"
+        android:id="@+id/btnCerrarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="3dp"
-        android:text="Salir"
+        android:text="Cerrar sesión"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtNombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
