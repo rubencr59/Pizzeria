@@ -65,17 +65,18 @@
         android:text="Nuestras Pizzas"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button7"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPizzaPred"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
-        android:id="@+id/button7"
+        android:id="@+id/btnPizzaPred"
         android:layout_width="0dp"
         android:layout_height="87dp"
         android:layout_marginStart="9dp"
         android:layout_marginEnd="9dp"
         android:background="@drawable/favpred"
         android:contentDescription="Pizzas predeterminadas"
+        android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/txtPizzaPredetermina"
         app:layout_constraintStart_toStartOf="@+id/txtPizzaPredetermina"
