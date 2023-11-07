@@ -96,4 +96,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnRetrocesoPedidos"
+        android:layout_width="65dp"
+        android:layout_height="45dp"
+        android:onClick="onClick"
+        app:icon="@drawable/arrow_left"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="662dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

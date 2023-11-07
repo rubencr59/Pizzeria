@@ -21,6 +21,10 @@ public class Pedidos extends AppCompatActivity implements View.OnClickListener {
             Intent intent = new Intent(this, NuestrasPizzas.class);
             startActivity(intent);
             finish();
+        }else if(v.getId() == R.id.btnRetrocesoPedidos){
+            Intent intent = new Intent(this, Main.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

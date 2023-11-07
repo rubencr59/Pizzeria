@@ -2,26 +2,35 @@ package com.example.pizzeria.Clases;
 
 public class Pizza {
 
-    int imagenPizza;
-    String tamañoPizza;
-    String[] ingredientesPizza;
+    private int imagenPizza;
 
-    public int getImagenPizza() {
-        return imagenPizza;
-    }
+    private String nombre;
+    private String tamañoPizza = null;
+    private String[] ingredientesPizza;
 
-    public Pizza(int imagenSource, String tamaño, String[] ingredientes){
+
+
+    public Pizza(int imagenSource, String nombrePizza,  String[] ingredientes){
         imagenPizza = imagenSource;
 
-        tamañoPizza = tamaño;
+        nombre = nombrePizza;
 
         ingredientesPizza = ingredientes;
     }
 
+
+
+
+    public int getImagenSource(){
+        return imagenPizza;
+    }
     public String getTamañoPizza() {
         return tamañoPizza;
     }
 
+    public String getNombrePizza(){
+        return nombre;
+    }
     public void setTamañoPizza(String tamañoPizza) {
         this.tamañoPizza = tamañoPizza;
     }
