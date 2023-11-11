@@ -3,7 +3,7 @@ package com.example.pizzeria;
 import static com.example.pizzeria.Clases.BackgroundManager.getColorFondo;
 import static com.example.pizzeria.Clases.BackgroundManager.getColorTexto;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -15,8 +15,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.example.pizzeria.Clases.Alertas;
+import com.example.pizzeria.Clases.Usuario;
+import com.example.pizzeria.Enum.TamañoPizza;
 
 
 public class Configuracion  extends AppCompatActivity implements View.OnClickListener {
@@ -25,6 +30,7 @@ public class Configuracion  extends AppCompatActivity implements View.OnClickLis
 
     RadioButton[] listabotones;
     TextView texto;
+    Usuario usuarioActual;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,7 @@ public class Configuracion  extends AppCompatActivity implements View.OnClickLis
                 findViewById(R.id.radiobtnBlanco)
         };
 
+        usuarioActual = Usuario.getUsuarioActual();
         texto = findViewById(R.id.txtCambiarColor);
 
         GradientDrawable border = new GradientDrawable();
@@ -63,11 +70,22 @@ public class Configuracion  extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
 
 
+
         if (v.getId() == R.id.btnRetrocederConfiguracion){
             Intent intent = new Intent(this, Main.class);
             startActivity(intent);
             finish();
-        }else{
+        }else if(v.getId() == R.id.btnActivarPizzaFav){
+            if(usuarioActual.getActivarPizzaBoolean()){
+                usuarioActual.setActivarPizzaBoolean(false);
+                Alertas.crearDialogo(this,"Pizza favorita desactivada", "La pizza favorita ha sido desactivada.", false, null);
+            }else{
+                usuarioActual.setActivarPizzaBoolean(true);
+                Alertas.crearDialogo(this,"Pizza favorita activada", "La pizza favorita ha sido activada.", false, null);
+
+            }
+
+        } else{
             int colorFondo = Color.WHITE;
             int colorTexto = Color.BLACK;
             if (v.getId() == R.id.radiobtnRojo){
@@ -86,7 +104,6 @@ public class Configuracion  extends AppCompatActivity implements View.OnClickLis
             }
             base.setBackgroundColor(colorFondo);
             texto.setTextColor(colorTexto);
-
 
             SharedPreferences preferences = getSharedPreferences("Preferencias", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="18dp">
+
+    <RadioGroup
+        android:id="@+id/seleccionarTamaño"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <RadioButton
+            android:id="@+id/elegirTamañoPequeño"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Pequeña  6.99€" />
+
+        <RadioButton
+            android:id="@+id/elegirTamañoMediano"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Mediana 9.99€" />
+
+        <RadioButton
+            android:id="@+id/elegirTamañoGrande"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Grande  14.99€" />
+    </RadioGroup>
+
+</LinearLayout>

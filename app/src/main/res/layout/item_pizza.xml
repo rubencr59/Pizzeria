@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayoutNuestrasPizzas"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayoutNuestrasPizzas"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+    android:orientation="horizontal"
+    android:clickable="true"
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/pizza_image"
@@ -13,26 +17,70 @@
         android:background="#00FFFFFF"
         android:scaleType="centerCrop" />
 
-    <TextView
-        android:id="@+id/nombrePizzaTextView"
+    <Button
+        android:id="@+id/btnBorrarPizza"
+        android:layout_width="40dp"
+        android:layout_height="41dp"
+        android:layout_alignTop="@id/pizza_image"
+        android:layout_marginStart="217dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@id/pizza_image"
+        android:background="@android:color/transparent"
+        android:onClick="onClick"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:visibility="gone"
+        app:icon="@drawable/borrar"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutDetalles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="4dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_below="@id/pizza_image"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
 
-    <TextView
-        android:id="@+id/ingredientesPizzaTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:paddingStart="16dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp" />
+        <TextView
+            android:id="@+id/txtnombrePizza"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/txtingredientesPizza"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/txtTamaño"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtPrecio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>

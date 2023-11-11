@@ -13,10 +13,16 @@
         android:theme="@style/AppThemeWhite"
         tools:targetApi="31">
         <activity
-            android:name=".NuestrasPizzas"
+            android:name=".PizzaPersonalizada"
             android:exported="false" />
         <activity
-            android:name=".Base"
+            android:name=".PizzaFav"
+            android:exported="false" />
+        <activity
+            android:name=".Confirmacion"
+            android:exported="false" />
+        <activity
+            android:name=".NuestrasPizzas"
             android:exported="false" />
         <activity
             android:name=".Configuracion"

@@ -11,6 +11,5 @@ public class Web extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p_predeterminada);
 
-        //Para la lista utilizar spinner
     }
 }

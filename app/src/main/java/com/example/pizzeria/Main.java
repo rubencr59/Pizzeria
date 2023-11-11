@@ -76,6 +76,10 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
             Intent intent = new Intent(this, Configuracion.class);
             startActivity(intent);
             finish();
+        } else if (v.getId() == R.id.btnWeb) {
+            Intent intent = new Intent(this, Web.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

@@ -22,11 +22,8 @@ import com.example.pizzeria.Clases.Usuario;
 import java.util.ArrayList;
 
 public class InicioSesion extends AppCompatActivity implements View.OnClickListener {
-
-
     DAOUsuarios TodosLosUsuarios;
     ConstraintLayout base;
-
     TextView txtInicioSesion;
     TextView nombreUsuario;
     String textoNombreUsuario;
@@ -35,10 +32,10 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
     SharedPreferences sharedPreferences;
     String savedUsername;
     String savedPassword;
+    Boolean checked;
     String colorFondo;
     String colorTexto;
     CheckBox txtRecuerdame;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +57,18 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
         sharedPreferences = getSharedPreferences("Preferencias", MODE_PRIVATE);
 
         //Obtiene el nombre de usuario y la contraseña si han sido guardadas (con el check Recuerdame).
-        savedUsername = sharedPreferences.getString("nombreUsuario", "");
-        savedPassword = sharedPreferences.getString("contraseñaUsuario", "");
 
-        if (!savedUsername.isEmpty() && !savedPassword.isEmpty()) {
-            // Si se encuentran valores guardados, autocompletar los campos.
-            nombreUsuario = findViewById(R.id.txfieldUsuario);
-            contraseñaUsuario = findViewById(R.id.txtFieldContraseña);
+        checked = Boolean.parseBoolean(sharedPreferences.getString("checked", ""));
+
+        if (checked) {
+            savedUsername = sharedPreferences.getString("nombreUsuario", "");
+            savedPassword = sharedPreferences.getString("contraseñaUsuario", "");
 
             nombreUsuario.setText(savedUsername);
             contraseñaUsuario.setText(savedPassword);
+        }else{
+            nombreUsuario.setText("");
+            contraseñaUsuario.setText("");
         }
 
         base = findViewById(R.id.fondoInicioSesion);
@@ -83,15 +82,17 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
         if (colorFondo != "" && colorTexto !=""){
             base.setBackgroundColor(Integer.parseInt(colorFondo));
             nombreUsuario.setTextColor(Integer.parseInt(colorTexto));
+            nombreUsuario.setHintTextColor(Integer.parseInt(colorTexto));
             contraseñaUsuario.setTextColor(Integer.parseInt(colorTexto));
+            contraseñaUsuario.setHintTextColor(Integer.parseInt(colorTexto));
+
             txtInicioSesion.setTextColor(Integer.parseInt(colorTexto));
             txtRecuerdame.setTextColor(Integer.parseInt(colorTexto));
+
         }
 
 
     }
-
-
 
     //Comprueba si ese nombre de usuario ya está registrado.
     public boolean comprobarNombreUsuarioRegistrado(String nombreUsuarioAcomprobar){
@@ -130,17 +131,24 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
             //Si la contraseña es correcta inicia sesión.
             if (validarInicioSesion( contraseñaUsuarioAIniciar)) {
 
-                Intent intent = new Intent(this, Main.class);
                 // Verificar si el CheckBox está marcado
                 CheckBox checkBoxRecuerdame = findViewById(R.id.checkRecuerdame);
+
+                SharedPreferences preferences = getSharedPreferences("Preferencias", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+
                 if (checkBoxRecuerdame.isChecked()) {
                     // Guardar el nombre de usuario y contraseña en preferencias compartidas
-                    SharedPreferences preferences = getSharedPreferences("Preferencias", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("nombreUsuario", nombreUsuarioAIniciar);
                     editor.putString("contraseñaUsuario", contraseñaUsuarioAIniciar);
-                    editor.apply();
+                    editor.putString("checked", "true");
+                }else{
+                    editor.putString("checked", "false");
+
                 }
+                editor.apply();
+                Intent intent = new Intent(this, Main.class);
+                Usuario.setUsuarioActual(new Usuario(nombreUsuarioAIniciar, contraseñaUsuarioAIniciar));
 
                 intent.putExtra("nombreUsuario", nombreUsuarioAIniciar);
                 startActivity(intent);
@@ -177,7 +185,7 @@ public class InicioSesion extends AppCompatActivity implements View.OnClickListe
             InicioDeSesion(textoNombreUsuario,textoContraseñaUsuario);
         }else if(view.getId() == R.id.btnRegistro){
             Registro(textoNombreUsuario,textoContraseñaUsuario);
-        }else if(view.getId() == R.id.btnSalir){
+        }else if(view.getId() == R.id.btnSalirFav){
             //Creo la función que quiero que haga.
             DialogInterface.OnClickListener confirmarClickListener = new DialogInterface.OnClickListener() {
                 @Override

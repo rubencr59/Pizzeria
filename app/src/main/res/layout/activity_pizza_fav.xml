@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayoutPizzaFav"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00FFFFFF"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/pizza_image_fav"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="#00FFFFFF"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/txtnombrePizzaFav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pizza_image_fav"
+        android:layout_marginTop="8dp"
+        android:background="#00FFFFFF"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtingredientesPizzaFav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtnombrePizzaFav"
+        android:background="#00FFFFFF"
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:id="@+id/txtTamañoFav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtingredientesPizzaFav"
+        android:background="#00FFFFFF"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtPrecioFav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtTamañoFav"
+        android:background="#00FFFFFF"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Botón Agregar al Carrito -->
+    <Button
+        android:id="@+id/btnAgregarAlCarrito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtPrecioFav"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:onClick="onClick"
+        android:text="Agregar al Carrito" />
+
+    <!-- Botón Salir -->
+    <Button
+        android:id="@+id/btnSalirFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="onClick"
+        app:icon="@drawable/arrow_left"
+        app:iconSize="25dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+</RelativeLayout>

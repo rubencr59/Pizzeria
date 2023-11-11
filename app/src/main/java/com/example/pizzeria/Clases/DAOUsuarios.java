@@ -12,21 +12,11 @@ public class DAOUsuarios {
         usuarios.add(ruben);
     }
     public ArrayList<Usuario> obtenerUsuarios() {
-        ArrayList<Usuario> copiaUsuarios = new ArrayList<>();
-
-        for (Usuario usuario : this.usuarios) {
-            Usuario copiaUsuario = new Usuario();
-            copiaUsuario.setNombre(usuario.getNombre());
-            copiaUsuario.setContraseña(usuario.getContraseña());
-            copiaUsuarios.add(copiaUsuario);
-        }
-        return copiaUsuarios;
+            return usuarios;
     }
 
     public void addUser(String usuario, String contraseña){
-
-        Usuario newUser = new Usuario(usuario, contraseña);
-        usuarios.add(newUser);
+        usuarios.add(new Usuario(usuario, contraseña));
     }
 
 }
